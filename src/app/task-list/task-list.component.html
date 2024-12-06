@@ -1,0 +1,9 @@
+<div class="task-list">
+    <button (click)="fetchTasks()">Refresh</button>
+    <div *ngFor="let task of tasks">
+      <p>
+        {{ task.entity_name }} - {{ task.task_type }} ({{ task.date }}, {{ task.time }})
+        <!-- <button (click)="deleteTask(task._id)">Delete</button> -->
+      </p>
+    </div>
+  </div>
