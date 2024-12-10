@@ -1,1 +1,72 @@
-<p>task-form works!</p>
+<div class="modal-overlay" *ngIf="isOpen">
+    <div class="modal">
+      <h2 class="modal-header">New Task</h2>
+  
+      <!-- Task Status Toggle -->
+      <div class="status-toggle">
+        <button 
+          [class.active]="task.status === 'Open'" 
+          (click)="setStatus('Open')">Open</button>
+        <button 
+          [class.active]="task.status === 'Closed'" 
+          (click)="setStatus('Closed')">Closed</button>
+      </div>
+  
+      <!-- Form Inputs -->
+      <form (ngSubmit)="saveTask()">
+        <label>
+          Entity Name:
+          <input type="text" [(ngModel)]="task.entity_name" name="entity_name" required />
+        </label>
+  
+        <label>
+          Date:
+          <input type="date" [(ngModel)]="task.date" name="date" required />
+        </label>
+  
+        <label>
+          Time:
+          <div class="time-inputs">
+            <select [(ngModel)]="time.hour" name="hour">
+              <option *ngFor="let hour of hours" [value]="hour">{{ hour }}</option>
+            </select>
+            <select [(ngModel)]="time.minute" name="minute">
+              <option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</option>
+            </select>
+            <select [(ngModel)]="time.period" name="period">
+              <option value="AM">AM</option>
+              <option value="PM">PM</option>
+            </select>
+          </div>
+        </label>
+  
+        <label>
+          Task Type:
+          <select [(ngModel)]="task.task_type" name="task_type">
+            <option *ngFor="let type of taskTypes" [value]="type">{{ type }}</option>
+          </select>
+        </label>
+  
+        <!-- <label>
+          Phone Number:
+          <input type="tel" [(ngModel)]="task.phone_number" name="phone_number" required />
+        </label> -->
+  
+        <label>
+          Contact Person:
+          <input type="text" [(ngModel)]="task.contact_person" name="contact_person" required />
+        </label>
+  
+        <label>
+          Note (optional):
+          <textarea [(ngModel)]="task.note" name="note"></textarea>
+        </label>
+  
+        <!-- Action Buttons -->
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" (click)="closeModal()">Cancel</button>
+          <button type="submit" class="btn-save">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>

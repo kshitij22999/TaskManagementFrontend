@@ -16,5 +16,20 @@ export class TaskmanagementServiceService {
     return this.http.get<Task[]>(`${this.apiUrl}/tasks`);
   }
 
+  createTask(task:Task): Observable<any> {
+    return this.http.post<Task>(`${this.apiUrl}/tasks`, task);
+  }
+
+  deleteTask(taskId:string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/tasks/${taskId}`);
+  }
+
+  updateTask(taskId: string, task: Task): Observable<any> {
+    return this.http.put(`${this.apiUrl}/tasks/${taskId}`, task);
+  }
+
+  filterTasks(field:string, value:string): Observable<Task[]>{
+    return this.http.get<Task[]>(`${this.apiUrl}/tasks?${field}=${value}`);
+  }
 
 }

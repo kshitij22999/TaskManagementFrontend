@@ -7,6 +7,8 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { TaskFormComponent } from './task-form/task-form.component';
 import { TaskmanagementServiceService } from './services/taskmanagement-service.service';
 import { LoginComponent } from './login/login.component';
+import { HttpClientModule  } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,11 +19,13 @@ import { LoginComponent } from './login/login.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     provideClientHydration(),
-    TaskmanagementServiceService
+    TaskmanagementServiceService,
   ],
   bootstrap: [AppComponent]
 })

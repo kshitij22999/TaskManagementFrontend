@@ -1,9 +1,97 @@
-<div class="task-list">
-    <button (click)="fetchTasks()">Refresh</button>
-    <div *ngFor="let task of tasks">
-      <p>
-        {{ task.entity_name }} - {{ task.task_type }} ({{ task.date }}, {{ task.time }})
-        <!-- <button (click)="deleteTask(task._id)">Delete</button> -->
-      </p>
+  <div class="container">
+    <!-- Sales Log Header -->
+    <div class="sales-log-header">
+      <h2>Sales Log</h2>
+      <div class="actions">
+        <button (click)="showTaskForm()">New Task</button>
+        <app-task-form *ngIf="isTaskFormOpen" [isOpen]="isTaskFormOpen" (close)="closeTaskForm()" (save)="handleSave($event)">
+        </app-task-form>
+        <input type="text" placeholder="Search" class="search-input" />
+      </div>
+    </div>
+  
+    <!-- Grouped Tasks Table -->
+    <div class="table-container">
+        <table class="task-table">
+          <thead>
+            <tr>
+              <th *ngFor="let header of headers; let i=index">
+                <span>{{ header.name }}</span>
+                <div *ngIf="header.name !== 'Options'">
+                <button (click)="openFilterModal(i)">filter</button>
+
+                <div *ngIf="showFilterPopup" class="filter-popup" [ngStyle]="{ top: popupPosition.top, left: popupPosition.left }">
+                  <h4>Filter by {{ headers[activeHeaderIndex!].name }}</h4>
+                  <input 
+                    type="text" 
+                    [(ngModel)]="filterValue" 
+                    placeholder="Enter filter value" 
+                  />
+                  <div class="popup-buttons">
+                    <button (click)="applyFilter(headers[activeHeaderIndex!].field!,filterValue)">Apply</button>
+                    <button (click)="closeFilterModal()">Cancel</button>
+                  </div>
+                </div>
+              </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Grouped by Date -->
+          <ng-container *ngFor="let group of groupedTask | keyvalue">
+            <tr class="group-row has-line">
+              <td colspan="8">
+                <span class="group-date">{{ group.key }}</span>
+                <span class="group-count">{{ group.value.taskCount }} Open Tasks</span>
+              </td>
+            </tr>
+            <tr *ngFor="let task of group.value.tasks">
+              <td>{{ task.date }}</td>
+              <td>{{ task.entity_name }}</td>
+              <td>
+                <span [class.phone-icon]="task.task_type === 'Call'" [class.meeting-icon]="task.task_type === 'Meeting'"></span>
+                {{ task.task_type }}
+              </td>
+              <td>{{ task.time }}</td>
+              <td>{{ task.contact_person }}</td>
+              <td>
+                <ng-container *ngIf="task.note else noNote">
+                  <p>{{ task.note }}</p>
+                </ng-container>
+                <ng-template #noNote>
+                  <span><button (click)="addNote(task)" class="add-note">Add Note</button></span>
+                </ng-template>
+              </td>
+              <td>
+                <div class="status-container" (mouseover)="hoverStatus(task)" (mouseleave)="closeStatusPopup()">
+                  {{ task.status }}
+                  <div *ngIf="hoveredTask === task" class="status-popup">
+                    <div>Status</div>
+                    <td style="display: flex; justify-content: center; align-items: center;">
+                    <div [class.highlight]="task.status === 'Open'" style="margin-right: 10px;">Open</div>
+                    <div [class.highlight]="task.status === 'Closed'" style="float: right;">Closed</div>
+                    </td>
+                  </div>
+                </div>
+              </td>
+              <td>
+                 <!-- Dropdown options -->
+          <div class="dropdown">
+            <button class="dropdown-btn">Options</button>
+            <div class="dropdown-menu">
+              <div (click)="editTask(task)">Edit</div>
+              <div (click)="duplicateTask(task)">Duplicate</div>
+              <div (click)="toggleStatus(task)">
+                {{ task.status === 'Open' ? 'Mark as Closed' : 'Mark as Open' }}
+              </div>
+              <div (click)="deleteTask(task._id.$oid)">Delete</div>
+            </div>
+          </div>
+              </td>
+            </tr>
+          </ng-container>
+          </tbody>
+        </table>
+      
     </div>
   </div>

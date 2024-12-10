@@ -1,0 +1,220 @@
+.table-container {
+    padding: 20px;
+    background-color: #f8f9fa;
+    position: relative;
+  }
+
+  .task-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Arial', sans-serif;
+  }
+
+  
+    .task-table th,
+    .task-table td {
+      padding: 10px 15px;
+      text-align: left;
+    }
+
+    .task-table thead th {
+      font-size: 14px;
+      color: #6c757d;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .task-table tbody tr {
+      background-color: white;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      margin-bottom: 10px;
+      display: table-row; /* Allow the browser to calculate column alignment */
+    }
+
+    .task-table tbody tr:hover {
+      background-color: #f1f3f5;
+    }
+
+    .task-table td i {
+      margin-right: 8px;
+    }
+
+    .add-note {
+      color: #007bff;
+      cursor: pointer;
+    }
+  
+  .group-row {
+    background-color: #eef4fa;
+    font-weight: bold;
+  }
+  
+  .group-row td {
+    padding: 15px;
+  }
+  
+  .group-date {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .group-count {
+    font-size: 14px;
+    color: #666;
+    margin-left: 10px;
+  }
+  
+  .data-row td {
+    padding: 10px;
+  }
+  
+  .dropdown {
+    position: relative;
+  }
+  
+  .dropdown-btn {
+    position: relative;
+    padding: 5px 10px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    z-index: 0;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    z-index: 999;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dropdown:hover .dropdown-menu {
+    display: block;
+    cursor: pointer;
+  }
+
+  .open-status {
+    color: #28a745;
+    font-weight: bold;
+  }
+  
+  .closed-status {
+    color: #dc3545;
+    font-weight: bold;
+  }
+
+  .status:hover {
+    display: block;
+    cursor: pointer;
+  }
+
+  /* Container for status */
+.status-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Popup modal */
+.status-popup {
+  width: 170px;
+  position: absolute;
+  top: 25px;
+  left: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 1000;
+}
+
+/* Status option */
+.status-popup div {
+  padding: 5px 10px;
+  color: #333;
+  font-size: 14px;
+  pointer-events: none; /* Makes it non-clickable */
+}
+
+/* Highlight correct status */
+.status-popup div.highlight {
+  font-weight: bold;
+  color: #007bff;
+  background-color: #f0f8ff;
+  border-radius: 4px;
+}
+
+.dropdown-menu div{
+  padding-top: 5px;
+}
+
+table th .active-filter {
+  color: #000;
+}
+
+.filter-popup {
+  position:absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  animation: fadeIn 0.3s ease-in-out;
+  width: 200px;
+}
+
+.filter-popup h4 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.filter-popup input {
+  width: 90%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.popup-buttons button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.popup-buttons button:first-child {
+  background-color: #007bff;
+  color: white;
+}
+
+.popup-buttons button:last-child {
+  background-color: #ccc;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
